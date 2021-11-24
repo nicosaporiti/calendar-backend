@@ -58,7 +58,10 @@ const loginUsuario = async (req, res = response) => {
 
     // Confirmar los passwords
 
-    const validPassword = bcrypt.compareSync(password, usuario.password);
+    const validPassword = bcrypt.compareSync(
+      password.toString(),
+      usuario.password
+    );
 
     if (!validPassword) {
       return res.status(400).json({
@@ -96,6 +99,8 @@ const revalidarToken = async (req, res = response) => {
   res.json({
     ok: true,
     token,
+    uid,
+    name,
   });
 };
 
